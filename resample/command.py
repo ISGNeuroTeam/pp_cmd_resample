@@ -5,13 +5,14 @@ from pp_exec_env.base_command import BaseCommand, Syntax
 
 
 class ResampleCommand(BaseCommand):
-    # define syntax of your command here
+    """
+    Resample signal to num samples using Fourier method along the given axis.
+    | resample signal_name num=100
+    """
     syntax = Syntax(
         [
             Positional("array_to_resample", required=True, otl_type=OTLType.TEXT),
             Keyword("num", required=True, otl_type=OTLType.INTEGER),
-            Keyword("kwarg_int_double_argument", required=False, otl_type=OTLType.NUMBERIC),
-            Keyword("some_kwargs", otl_type=OTLType.ALL, inf=True),
         ],
     )
     use_timewindow = False  # Does not require time window arguments
@@ -21,10 +22,10 @@ class ResampleCommand(BaseCommand):
         self.log_progress('Start resample command')
 
         column_to_resample = self.get_arg("array_to_resample").value
-        if self.get_arg("array_to_resample").named_as == "":
+        if self.get_arg("num").named_as == "":
             new_name = f"resampled_{column_to_resample}"
         else:
-            new_name = self.get_arg("array_to_resample").named_as
+            new_name = self.get_arg("num").named_as
         num = self.get_arg("num").value
 
         self.logger.debug(f'Command resample get first positional argument = {column_to_resample}')

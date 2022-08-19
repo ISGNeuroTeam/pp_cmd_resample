@@ -1,8 +1,10 @@
 # pp_cmd_resample
 Postprocessing command "resample"
 
+Resample signal to num samples using Fourier method along the given axis.
+
 Usage example:
-`... | resample`
+`... | resample column_name num=100`
 
 ## Getting started
 ###  Prerequisites
@@ -26,5 +28,5 @@ Use `pp` to test resample command:
 pp
 Storage directory is /tmp/pp_cmd_test/storage
 Commmands directory is /tmp/pp_cmd_test/pp_cmd
-query: | otl_v1 <# makeresults count=100 #> |  resample 
+query: | otl_v1 <# makeresults count=100 #> | resample _time num=200
 ```
